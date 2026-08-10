@@ -56,19 +56,13 @@ def get_height(prompt):
 
 def calculate_bmi(user_weight, user_height):
     """Программа вычисляет Индекс массы тела (ИМТ)"""
-    # Индекс массы тела, Округлить
-    bmi = round(user_weight / (user_height**2), 1)
-    return bmi
+    return user_weight / (user_height**2)
 
 
 def calculate_water_needed(user_weight):
     """Программа вычисляет норму воды в литрах"""
-    # Рассчитать норму воды в миллилитрах:
-    ML_OF_WATER_PER_KG = 30
-    water_ml = user_weight * ML_OF_WATER_PER_KG
-    # Перевести в литры (делим на 1000мл), округлить:
-    water_l = round(water_ml / 1000, 1)
-    return water_l
+    L_OF_WATER_PER_KG = 30 / 1000  # 0.03 л воды на кг веса в день
+    return user_weight * L_OF_WATER_PER_KG
 
 
 def fit_life():
@@ -84,10 +78,12 @@ def fit_life():
     water_needed = calculate_water_needed(weight)
 
     # Выводим отчет пользователю
-    print(f"\n\nОтчет для пользователя: {name} ({age} г.)")
-    print(f"\nТвой Индекс Массы Тела: {bmi}")
-    print(f"Рекомендуемая норма воды: {water_needed} л. в день")
-    print("\nРасчет окончен. Будьте здоровы!")
+    print(f"\n{'=' * 40}")  # Pretty Print для читаемости
+    print(f"Отчет для пользователя: {name} ({age} г.)")
+    print(f"Твой Индекс Массы Тела: {bmi:.1f}")
+    print(f"Рекомендуемая норма воды: {water_needed:.1f} л. в день")
+    print(f"{'=' * 40}")    # Pretty Print для читаемости
+    print("Расчет окончен. Будьте здоровы! @FitLife\n")
 
 
 fit_life()
