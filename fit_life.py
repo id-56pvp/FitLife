@@ -1,13 +1,6 @@
 # Проект FitLife - MVP версия 1.0
 
 
-def greeting():
-    """Программа вежливо здоровается спрашивает имя и возраст"""
-    name = get_name("Здравствуйте, как Вас зовут?\n")
-    age = get_age("Сколько Вам лет?\n")
-    return name, age
-
-
 def get_name(prompt):
     """Проверяет что имя - не пустое"""
     while True:
@@ -31,13 +24,6 @@ def get_age(prompt):
             return age
         except ValueError:
             print("Пожалуйста, введите корректный возраст (целое число)")
-
-
-def parameters():
-    """Программа спрашивает вес и рост"""
-    weight = get_weight("Напишите Ваш вес в кг (например, 72)\n")
-    height = get_height("Напишите Ваш рост в метрах (например, 1.75)\n")
-    return weight, height
 
 
 def get_weight(prompt):
@@ -75,7 +61,7 @@ def calculate_bmi(user_weight, user_height):
     return bmi
 
 
-def water_needed(user_weight):
+def calculate_water_needed(user_weight):
     """Программа вычисляет норму воды в литрах"""
     # Рассчитать норму воды в миллилитрах:
     ML_OF_WATER_PER_KG = 30
@@ -86,12 +72,21 @@ def water_needed(user_weight):
 
 
 def fit_life():
-    """Главная функция программы"""
-    name, age = greeting()
-    weight, height = parameters()
+    """Программа"""
+    # Собираем данные пользователя
+    name = get_name("Здравствуйте, как Вас зовут?\n")
+    age = get_age("Сколько Вам лет?\n")
+    weight = get_weight("Напишите Ваш вес в кг (например, 72)\n")
+    height = get_height("Напишите Ваш рост в метрах (например, 1.75)\n")
+
+    # Рассчитываем показатели пользователя
+    bmi = calculate_bmi(weight, height)
+    water_needed = calculate_water_needed(weight)
+
+    # Выводим отчет пользователю
     print(f"\n\nОтчет для пользователя: {name} ({age} г.)")
-    print(f"\nТвой Индекс Массы Тела: {calculate_bmi(weight, height)}")
-    print(f"Рекомендуемая норма воды: {water_needed(weight)} л. в день")
+    print(f"\nТвой Индекс Массы Тела: {bmi}")
+    print(f"Рекомендуемая норма воды: {water_needed} л. в день")
     print("\nРасчет окончен. Будьте здоровы!")
 
 
