@@ -9,26 +9,28 @@ def greeting():
 
 
 def get_name(prompt):
+    """Проверяет что имя - не пустое"""
     while True:
         name = input(prompt).strip()
         if not name:
-            print("Имя не может быть пустым. Пожалуйста, введите корректное имя.")
+            print("Имя не может быть пустым. "
+                  "Исправьте ошибку :)")
             continue
         return name
 
 
 def get_age(prompt):
+    """Проверяет что возраст - целое положительное число"""
     while True:
         try:
             age = int(input(prompt))
             if age <= 0:
-                print(
-                    "Возраст должен быть положительным числом. Пожалуйста, попробуйте снова."
-                )
+                print("Возраст должен быть положительным числом. "
+                      "Исправьте ошибку :)")
                 continue
             return age
         except ValueError:
-            print("Пожалуйста, введите корректный возраст (целое число).")
+            print("Пожалуйста, введите корректный возраст (целое число)")
 
 
 def parameters():
@@ -39,31 +41,31 @@ def parameters():
 
 
 def get_weight(prompt):
+    """Проверяет что вес - целое положительное число c точкой или без"""
     while True:
         try:
-            weight = int(input(prompt))
+            weight = float(input(prompt))
             if weight <= 0:
-                print(
-                    "Вес должен быть положительным числом. Пожалуйста, попробуйте снова."
-                )
+                print("Вес должен быть положительным числом. "
+                      "Исправьте ошибку :)")
                 continue
             return weight
         except ValueError:
-            print("Пожалуйста, введите корректный вес (целое число).")
+            print("Пожалуйста, введите корректный вес (например, 72.5)")
 
 
 def get_height(prompt):
+    """Проверяет что рост - положительное число с точкой или без"""
     while True:
         try:
             height = float(input(prompt))
             if height <= 0:
-                print(
-                    "Рост должен быть положительным числом. Пожалуйста, попробуйте снова."
-                )
+                print("Рост должен быть положительным числом. "
+                      "Исправьте ошибку :)")
                 continue
             return height
         except ValueError:
-            print("Пожалуйста, введите корректный рост (например, 1.75).")
+            print("Пожалуйста, введите корректный рост (например, 1.75)")
 
 
 def calculate_bmi(user_weight, user_height):
@@ -73,8 +75,8 @@ def calculate_bmi(user_weight, user_height):
     return bmi
 
 
-def calculate_water_needed(user_weight):
-    """Прорамма вычисляет норму воды в литрах"""
+def water_needed(user_weight):
+    """Программа вычисляет норму воды в литрах"""
     # Рассчитать норму воды в миллилитрах:
     ML_OF_WATER_PER_KG = 30
     water_ml = user_weight * ML_OF_WATER_PER_KG
@@ -83,13 +85,14 @@ def calculate_water_needed(user_weight):
     return water_l
 
 
-def FitLife_MVP():
+def fit_life():
+    """Главная функция программы"""
     name, age = greeting()
     weight, height = parameters()
-    print(f"\n\n\nОтчет для пользователя: {name} ({age} г.)")
-    print(f"Твой Индекс Массы Тела: {calculate_bmi(weight, height)}")
-    print(f"Рекомендуемая норма воды: {calculate_water_needed(weight)} л. в день")
-    print("\nРасчет окончен. Будьте здоровы!\n")
+    print(f"\n\nОтчет для пользователя: {name} ({age} г.)")
+    print(f"\nТвой Индекс Массы Тела: {calculate_bmi(weight, height)}")
+    print(f"Рекомендуемая норма воды: {water_needed(weight)} л. в день")
+    print("\nРасчет окончен. Будьте здоровы!")
 
 
-FitLife_MVP()
+fit_life()
