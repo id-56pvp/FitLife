@@ -1,6 +1,14 @@
-# Проект FitLife - MVP версия 1.0
+"""
+Проект FitLife - MVP версия 1.0
+Простой консольный калькулятор ИМТ и нормы воды.
+"""
 
 
+# Константы
+WATER_PER_KG = 0.03  # л. воды на кг веса в день
+
+
+# Функции ввода
 def get_name(prompt):
     """Проверяет что имя - не пустое"""
     while True:
@@ -27,7 +35,7 @@ def get_age(prompt):
 
 
 def get_weight(prompt):
-    """Проверяет что вес - целое положительное число c точкой или без"""
+    """Проверяет что вес - положительное число c точкой или без"""
     while True:
         try:
             weight = float(input(prompt))
@@ -54,36 +62,39 @@ def get_height(prompt):
             print("Пожалуйста, введите корректный рост (например, 1.75)")
 
 
+# Функции расчета
 def calculate_bmi(user_weight, user_height):
-    """Программа вычисляет Индекс массы тела (ИМТ)"""
+    """Вычисляет Индекс массы тела (ИМТ)"""
     return user_weight / (user_height**2)
 
 
 def calculate_water_needed(user_weight):
-    """Программа вычисляет норму воды в литрах"""
-    L_OF_WATER_PER_KG = 30 / 1000  # 0.03 л воды на кг веса в день
-    return user_weight * L_OF_WATER_PER_KG
+    """Вычисляет норму воды в литрах"""
+    return user_weight * WATER_PER_KG
 
 
+# Главная фукнция
 def fit_life():
-    """Программа"""
-    # Собираем данные пользователя
+    """Получает данные, рассчитывает ИМТ, норму воды и выводит отчет"""
+    # --- Ввод ---
     name = get_name("Здравствуйте, как Вас зовут?\n")
     age = get_age("Сколько Вам лет?\n")
     weight = get_weight("Напишите Ваш вес в кг (например, 72)\n")
     height = get_height("Напишите Ваш рост в метрах (например, 1.75)\n")
 
-    # Рассчитываем показатели пользователя
+    # --- Расчет ---
     bmi = calculate_bmi(weight, height)
     water_needed = calculate_water_needed(weight)
 
-    # Выводим отчет пользователю
-    print(f"\n{'=' * 40}")  # Pretty Print для читаемости
+    # --- Вывод ---
+    print(f"\n{'=' * 40}")  # Pretty Print
     print(f"Отчет для пользователя: {name} ({age} г.)")
     print(f"Твой Индекс Массы Тела: {bmi:.1f}")
     print(f"Рекомендуемая норма воды: {water_needed:.1f} л. в день")
-    print(f"{'=' * 40}")    # Pretty Print для читаемости
+    print(f"{'=' * 40}")    # Pretty Print
     print("Расчет окончен. Будьте здоровы! @FitLife\n")
 
 
-fit_life()
+# Точка входа
+if __name__ == "__main__":  # проверка останавливающая случайный запуск...
+    fit_life()              # ...fit_life() при импорте файла как модуля
